@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 namespace NoSenseTask
@@ -9,28 +10,32 @@ namespace NoSenseTask
         static void Main(string[] args)
         {
             int[] arrayOfIntts;
+            object result1;
+            object result2;
+            string userInput = string.Empty;
 
             while (true)
             {
                 Console.WriteLine("Please, input an array of integers");
                 try
                 {
-                    var userInput = Console.ReadLine(); //"12, 123, 14, 23, 17, 16" 
-                    if (string.IsNullOrWhiteSpace(userInput))
+                    userInput = Console.ReadLine(); //"12, 123, 14, 23, 17, 16" 
+                    arrayOfIntts = userInput.Split(",").Select(x => Convert.ToInt32(x)).ToArray();
+                    if (arrayOfIntts == null)
                     {
                         throw new ArgumentNullException("Initial Array is null");
                     }
-                    arrayOfIntts = userInput.Split(",").Select(x => Convert.ToInt32(x)).ToArray();
-                    object result1 = arrayOfIntts.ThisDoesntMakeAnySense(x => x > 14 && x < 100, () => 1);
-                    object result2 = arrayOfIntts.ThisDoesntMakeAnySense(x => x == 1000, () => 1);
-
-                    Console.WriteLine($"Input : {userInput} - Result1  : {result1}  - Result2  : {result2}");
+                    result1 = arrayOfIntts.ThisDoesntMakeAnySense(x => x > 14 && x < 100, () => RandomNumberGenerator.GetInt32(1, 100));
+                    result2 = arrayOfIntts.ThisDoesntMakeAnySense(x => x == 1000, () => RandomNumberGenerator.GetInt32(1, 100));
+                    
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine($"{e.Message}; Input is not a valid array of integers");
                     continue;
                 }
+                Console.WriteLine($"Input : {userInput} {Environment.NewLine} Result1 : {result1} {Environment.NewLine} Result2  : {result2} ");
+
             }
 
 

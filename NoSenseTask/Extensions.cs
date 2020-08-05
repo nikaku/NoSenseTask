@@ -8,15 +8,15 @@ namespace NoSenseTask
     {
         public static T ThisDoesntMakeAnySense<T>(this IEnumerable<T> data, Func<T, bool> predicate, Func<T> Creator)
         {
+            if (predicate == null || Creator == null)
+            {
+                throw  new ArgumentNullException();
+            }
             foreach (T value in data)
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException();
-                }
                 if (predicate(value))
                 {
-                    return value;
+                    return default(T);
                 }
             }
             return Creator();
