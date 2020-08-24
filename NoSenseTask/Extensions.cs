@@ -10,7 +10,7 @@ namespace NoSenseTask
         {
             if (predicate == null || Creator == null)
             {
-                throw  new ArgumentNullException();
+                throw new ArgumentNullException();
             }
             foreach (T value in data)
             {

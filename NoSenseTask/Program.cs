@@ -25,9 +25,9 @@ namespace NoSenseTask
                     {
                         throw new ArgumentNullException("Initial Array is null");
                     }
-                    result1 = arrayOfIntts.ThisDoesntMakeAnySense(x => x > 14 && x < 100, () => RandomNumberGenerator.GetInt32(1, 100));
-                    result2 = arrayOfIntts.ThisDoesntMakeAnySense(x => x == 1000, () => RandomNumberGenerator.GetInt32(1, 100));
-                    
+                    result1 = arrayOfIntts.ThisDoesntMakeAnySense(x => true , () => RandomNumberGenerator.GetInt32(1, 100));
+                    result2 = arrayOfIntts.ThisDoesntMakeAnySense(x => false, () => RandomNumberGenerator.GetInt32(1, 100));
+
                 }
                 catch (Exception e)
                 {
