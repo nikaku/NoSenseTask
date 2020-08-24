@@ -12,6 +12,10 @@ namespace NoSenseTask
             {
                 throw new ArgumentNullException();
             }
+            if (data == null)
+            {
+                throw new ArgumentNullException("Initial Array is null");
+            }
             foreach (T value in data)
             {
                 if (predicate(value))
